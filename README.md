@@ -1,1 +1,1 @@
-# RPA igra jeziku C++ z uporabo knjižnice SDL2
+# RPA - igra jeziku C++ z uporabo knjižnice SDL2
