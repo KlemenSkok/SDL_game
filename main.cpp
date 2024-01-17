@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <cmath>
 
 class Kvadrat {
     int a, x, y;
@@ -19,7 +20,7 @@ public:
 
 // class methods definitions
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-Kvadrat::Kvadrat() { a = 50; r = 255, g = b = 0; x = y = 20; }
+Kvadrat::Kvadrat() { a = 50; r = 255, g = b = 0; x = y = 300; }
 Kvadrat::Kvadrat(int a) { this->a = a; r = 255, g = b = 0; x = y = 20; }
 int Kvadrat::get_a() { return a; }
 int Kvadrat::get_x() { return x; }
@@ -30,10 +31,10 @@ void Kvadrat::setColor(SDL_Renderer *renderer) { SDL_SetRenderDrawColor(renderer
 void Kvadrat::refreshCoords(SDL_Rect &rect) {
     rect.x = this->x;
     rect.y = this->y;
-    if(rect.x < -1) rect.x = 0;
-    if(rect.x+a > 801) rect.x = 800-a;
-    if(rect.y < 0-1) rect.y = 0;
-    if(rect.y+a > 601) rect.y = 600-a;
+    if(rect.x < -1) rect.x = 1;
+    if(rect.x+a > 801) rect.x = 800-a-1;
+    if(rect.y < -1) rect.y = 1;
+    if(rect.y+a > 601) rect.y = 600-a-1;
 }
 
 // other functions definitions
@@ -41,6 +42,13 @@ void Kvadrat::refreshCoords(SDL_Rect &rect) {
 
 void resetColor(SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+}
+
+void update_movement(SDL_Rect &rect, int dest_x, int dest_y) {
+    int distance_x = dest_x - (rect.x + rect.w/2),
+        distance_y = dest_y - (rect.y + rect.h/2);// glede na sredino pravokotnika
+    double angle = atan2(distance_y, distance_x) * 180.0 / M_PI;
+    std::cout << "Kot je " << angle << "deg\n";
 }
 
 int main(int argc, char *argv[]) {
@@ -62,38 +70,28 @@ int main(int argc, char *argv[]) {
     
     Kvadrat kvadrat;
     SDL_Rect pravokotnik;
-    pravokotnik.x = 20;
-    pravokotnik.y = 20;
     pravokotnik.w = kvadrat.get_a();
     pravokotnik.h = kvadrat.get_a();
+
 
     bool quit = false;
     SDL_Event kb_event, w_event; //keyboard event, window event
     // main loop
     const Uint8 *stanja_tipk = nullptr;
     while(!quit) {
-        while(SDL_PollEvent(&w_event)) {
+        while(SDL_PollEvent(&w_event)) { //check events
             if(w_event.type == SDL_QUIT) {
                 std::cout << "Exiting the program...\n";
                 quit = true;
             }
-        }
-        stanja_tipk = SDL_GetKeyboardState(nullptr);
-
-        if(stanja_tipk[SDL_SCANCODE_W]) {
-            kvadrat.add_y(-1);
-        }
-        if(stanja_tipk[SDL_SCANCODE_A]) {
-            kvadrat.add_x(-1);
-        }
-        if(stanja_tipk[SDL_SCANCODE_S]) {
-            kvadrat.add_y(1);
-        }
-        if(stanja_tipk[SDL_SCANCODE_D]) {
-            kvadrat.add_x(1);
-        }
-        if(stanja_tipk[SDL_SCANCODE_Q]) {
-            quit = true;
+            else if(w_event.type == SDL_MOUSEBUTTONDOWN) {
+                if(w_event.button.button == SDL_BUTTON_LEFT) {
+                    int mouse_x, mouse_y;
+                    SDL_GetMouseState(&mouse_x, &mouse_y);
+                    printf("x: %d, y: %d\n", mouse_x, mouse_y);
+                    update_movement(pravokotnik, mouse_x, mouse_y);
+                }
+            }
         }
     	kvadrat.refreshCoords(pravokotnik);
 
@@ -115,3 +113,26 @@ int main(int argc, char *argv[]) {
     SDL_Quit();
     return 0;
 }
+
+
+
+/*
+? KEYBOARD MOVEMENT
+        stanja_tipk = SDL_GetKeyboardState(nullptr);
+
+        if(stanja_tipk[SDL_SCANCODE_W]) {
+            kvadrat.add_y(-1);
+        }
+        if(stanja_tipk[SDL_SCANCODE_A]) {
+            kvadrat.add_x(-1);
+        }
+        if(stanja_tipk[SDL_SCANCODE_S]) {
+            kvadrat.add_y(1);
+        }
+        if(stanja_tipk[SDL_SCANCODE_D]) {
+            kvadrat.add_x(1);
+        }
+        if(stanja_tipk[SDL_SCANCODE_Q]) {
+            quit = true;
+        } 
+*/
