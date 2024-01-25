@@ -44,11 +44,39 @@ void resetColor(SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 }
 
-void update_movement(SDL_Rect &rect, int dest_x, int dest_y) {
+void update_movement(SDL_Rect &rect, int dest_x, int dest_y, Kvadrat &kv) {//still needs calibration
     int distance_x = dest_x - (rect.x + rect.w/2),
         distance_y = dest_y - (rect.y + rect.h/2);// glede na sredino pravokotnika
-    double angle = atan2(distance_y, distance_x) * 180.0 / M_PI;
+    double angle = (atan2(distance_x, distance_y) * 180.0 / M_PI) + 180.0;
     std::cout << "Kot je " << angle << "deg\n";
+
+    double speed = 2.5, speed_x, speed_y;
+    speed_x = abs(speed * cos(angle));
+    speed_y = abs(speed * sin(angle));
+
+    if(angle <= 90.0) {
+        speed_x *= -1.0;
+        speed_y *= -1.0;
+    }
+    else if(angle <= 180.0) {
+        speed_x *= -1.0;
+    }
+    else if(angle <= 270.0) {
+        //oba pozitivna
+    }
+    else { //angle <= 360
+        speed_y *= -1.0;
+    }
+    //std::cout << "speed_x: " << speed_x << "\nspeed_y: " << speed_y << std::endl;
+    
+    if(std::abs(distance_x) <= std::abs(speed_x) && std::abs(distance_y) <= std::abs(speed_y)) {
+        rect.x = dest_x - rect.w/2;
+        rect.y = dest_y - rect.h/2;
+    }
+    else {
+        kv.add_x(static_cast<int>(round(speed_x)));
+        kv.add_y(static_cast<int>(round(speed_y)));
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -78,6 +106,7 @@ int main(int argc, char *argv[]) {
     SDL_Event kb_event, w_event; //keyboard event, window event
     // main loop
     const Uint8 *stanja_tipk = nullptr;
+    int mouse_x = w + pravokotnik.w/2, mouse_y = h + pravokotnik.h/2;
     while(!quit) {
         while(SDL_PollEvent(&w_event)) { //check events
             if(w_event.type == SDL_QUIT) {
@@ -86,14 +115,14 @@ int main(int argc, char *argv[]) {
             }
             else if(w_event.type == SDL_MOUSEBUTTONDOWN) {
                 if(w_event.button.button == SDL_BUTTON_LEFT) {
-                    int mouse_x, mouse_y;
                     SDL_GetMouseState(&mouse_x, &mouse_y);
                     printf("x: %d, y: %d\n", mouse_x, mouse_y);
-                    update_movement(pravokotnik, mouse_x, mouse_y);
                 }
             }
         }
-    	kvadrat.refreshCoords(pravokotnik);
+        update_movement(pravokotnik, mouse_x, mouse_y, kvadrat);
+
+        kvadrat.refreshCoords(pravokotnik);
 
         //modra barva za ozadje
         resetColor(renderer);
@@ -103,9 +132,8 @@ int main(int argc, char *argv[]) {
         SDL_RenderFillRect(renderer, &pravokotnik);
         SDL_RenderPresent(renderer);
 
-        SDL_Delay(1);
+        SDL_Delay(10); //100Hz
     } 
-
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
