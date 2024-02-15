@@ -1,0 +1,3 @@
+C:/Users/uporabnik/Desktop/SDL_game/build/CMakeFiles/test.dir
+C:/Users/uporabnik/Desktop/SDL_game/build/CMakeFiles/edit_cache.dir
+C:/Users/uporabnik/Desktop/SDL_game/build/CMakeFiles/rebuild_cache.dir
