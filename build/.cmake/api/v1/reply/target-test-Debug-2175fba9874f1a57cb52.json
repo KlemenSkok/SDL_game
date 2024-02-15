@@ -30,25 +30,25 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 42,
+				"line" : 46,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 28,
+				"line" : 32,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 46,
+				"line" : 50,
 				"parent" : 0
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 23,
+				"line" : 26,
 				"parent" : 0
 			}
 		]
@@ -59,22 +59,26 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu++23"
+					"fragment" : "-g"
 				}
 			],
 			"includes" : 
 			[
 				{
 					"backtrace" : 4,
-					"path" : "C:/Users/uporabnik/Desktop/SDL_game/include"
+					"path" : "C:/Users/Klemen/Desktop/test3/include"
 				},
 				{
 					"backtrace" : 4,
-					"path" : "C:/SDL2/SDL2-2.28.0/x86_64-w64-mingw32/include"
+					"path" : "C:/ProgLangs/cpp_libs/SDL2-2.28.5/x86_64-w64-mingw32/include"
 				},
 				{
 					"backtrace" : 4,
-					"path" : "C:/SDL2_Image/SDL2_image-2.6.2/x86_64-w64-mingw32/include"
+					"path" : "C:/ProgLangs/cpp_libs/SDL2-2.28.5/x86_64-w64-mingw32/include/SDL2"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "C:/ProgLangs/cpp_libs/SDL2_image-2.6.3/x86_64-w64-mingw32/include"
 				}
 			],
 			"language" : "CXX",
@@ -84,7 +88,7 @@
 				[
 					1
 				],
-				"standard" : "23"
+				"standard" : "17"
 			},
 			"sourceIndexes" : 
 			[
@@ -108,12 +112,12 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-LC:\\SDL2\\SDL2-2.28.0\\x86_64-w64-mingw32\\lib",
+				"fragment" : "-LC:\\ProgLangs\\cpp_libs\\SDL2-2.28.5\\x86_64-w64-mingw32\\lib",
 				"role" : "libraryPath"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-LC:\\SDL2_Image\\SDL2_image-2.6.2\\x86_64-w64-mingw32\\lib",
+				"fragment" : "-LC:\\ProgLangs\\cpp_libs\\SDL2_image-2.6.3\\x86_64-w64-mingw32\\lib",
 				"role" : "libraryPath"
 			},
 			{

@@ -3,15 +3,18 @@ project(test VERSION 0.1.0 LANGUAGES C CXX)
 
 
 # CMake setup
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_PATH ${PROJECT_SOURCE_DIR}/include)
-set(OUTPUT_DIR "${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}")
+set(OUTPUT_DIR "${CMAKE_SOURCE_DIR}/bin")
 #set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 #set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 #set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
+#set SDL2 and SDL2_image paths
+set(CMAKE_PREFIX_PATH "C:/ProgLangs/cpp_libs/SDL2-2.28.5/x86_64-w64-mingw32;C:/ProgLangs/cpp_libs/SDL2_image-2.6.3/x86_64-w64-mingw32")
 
 message(STATUS "")
+message(STATUS "Search for packages:")
 # SDL2 setup
 find_package(SDL2 REQUIRED)
 message(STATUS "Found package: ${SDL2_DIR}")
@@ -22,12 +25,13 @@ message(STATUS "")
 
 include_directories(
     ${CMAKE_INCLUDE_PATH}
-    "C:/SDL2/SDL2-2.28.0/x86_64-w64-mingw32/include"
-    "C:/SDL2_Image/SDL2_image-2.6.2/x86_64-w64-mingw32/include"
+    "C:/ProgLangs/cpp_libs/SDL2-2.28.5/x86_64-w64-mingw32/include"
+    "C:/ProgLangs/cpp_libs/SDL2-2.28.5/x86_64-w64-mingw32/include/SDL2"
+    "C:/ProgLangs/cpp_libs/SDL2_image-2.6.3/x86_64-w64-mingw32/include"
 )
 link_directories(
-    "C:/SDL2/SDL2-2.28.0/x86_64-w64-mingw32/lib"
-    "C:/SDL2_Image/SDL2_image-2.6.2/x86_64-w64-mingw32/lib"
+    "C:/ProgLangs/cpp_libs/SDL2-2.28.5/x86_64-w64-mingw32/lib"
+    "C:/ProgLangs/cpp_libs/SDL2_image-2.6.3/x86_64-w64-mingw32/lib"
 )
 
 # Files that should be compiled
@@ -41,8 +45,8 @@ foreach(SRC_FILE IN LISTS SRC)
     
 add_executable(${PROJECT_NAME} ${SRC})
 
-# LINK PROGRAMS
 
+# LINK PROGRAMS
 target_link_libraries(
     ${PROJECT_NAME}
     PRIVATE
@@ -53,9 +57,8 @@ target_link_libraries(
 )
 
 # Copy over static files
-
 message(STATUS "Copying all dependencies to ${OUTPUT_DIR}")
-file(GLOB PROJECT_DEPENDENCIES ${SDL2_LIBRARY})
+file(GLOB PROJECT_DEPENDENCIES ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY})
 
 foreach(Dependecy IN LISTS PROJECT_DEPENDENCIES)
     file(
@@ -63,3 +66,15 @@ foreach(Dependecy IN LISTS PROJECT_DEPENDENCIES)
         DESTINATION ${OUTPUT_DIR}
     )
 endforeach()
+
+#TODO
+#  implement automatic copying of all dependencies to the output directory (${PROJECT_DIR}/bin)
+#  SDL2.dll, SDL2_image.dll, and the project executable
+
+
+
+#! ALSO NEEDED: 
+#  ctrl+shift+p -> C/C++: Edit Configurations (UI)
+#  go to 'Include Path' and add:
+#  C:/ProgLangs/cpp_libs/SDL2_image-2.6.3/x86_64-w64-mingw32/**
+#  C:/ProgLangs/cpp_libs/SDL2-2.28.5/x86_64-w64-mingw32/**

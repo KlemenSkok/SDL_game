@@ -1,14 +1,14 @@
 [
 {
-  "directory": "C:/Users/uporabnik/Desktop/SDL_game/build",
-  "command": "C:\\Mingw32\\mingw64\\bin\\g++.exe  @CMakeFiles/test.dir/includes_CXX.rsp -g -std=gnu++23 -o CMakeFiles\\test.dir\\src\\main.cpp.obj -c C:\\Users\\uporabnik\\Desktop\\SDL_game\\src\\main.cpp",
-  "file": "C:/Users/uporabnik/Desktop/SDL_game/src/main.cpp",
+  "directory": "C:/Users/Klemen/Desktop/test3/build",
+  "command": "C:\\MinGW\\x86_64-13.2.0-release-posix-seh-ucrt-rt_v11-rev1\\mingw64\\bin\\g++.exe  @CMakeFiles/test.dir/includes_CXX.rsp -g -o CMakeFiles\\test.dir\\src\\main.cpp.obj -c C:\\Users\\Klemen\\Desktop\\test3\\src\\main.cpp",
+  "file": "C:/Users/Klemen/Desktop/test3/src/main.cpp",
   "output": "CMakeFiles/test.dir/src/main.cpp.obj"
 },
 {
-  "directory": "C:/Users/uporabnik/Desktop/SDL_game/build",
-  "command": "C:\\Mingw32\\mingw64\\bin\\g++.exe  @CMakeFiles/test.dir/includes_CXX.rsp -g -std=gnu++23 -o CMakeFiles\\test.dir\\src\\objekt.cpp.obj -c C:\\Users\\uporabnik\\Desktop\\SDL_game\\src\\objekt.cpp",
-  "file": "C:/Users/uporabnik/Desktop/SDL_game/src/objekt.cpp",
+  "directory": "C:/Users/Klemen/Desktop/test3/build",
+  "command": "C:\\MinGW\\x86_64-13.2.0-release-posix-seh-ucrt-rt_v11-rev1\\mingw64\\bin\\g++.exe  @CMakeFiles/test.dir/includes_CXX.rsp -g -o CMakeFiles\\test.dir\\src\\objekt.cpp.obj -c C:\\Users\\Klemen\\Desktop\\test3\\src\\objekt.cpp",
+  "file": "C:/Users/Klemen/Desktop/test3/src/objekt.cpp",
   "output": "CMakeFiles/test.dir/src/objekt.cpp.obj"
 }
 ]

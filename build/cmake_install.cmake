@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/uporabnik/Desktop/SDL_game
+# Install script for directory: C:/Users/Klemen/Desktop/test3
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/Mingw32/mingw64/bin/objdump.exe")
+  set(CMAKE_OBJDUMP "C:/MinGW/x86_64-13.2.0-release-posix-seh-ucrt-rt_v11-rev1/mingw64/bin/objdump.exe")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/uporabnik/Desktop/SDL_game/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Klemen/Desktop/test3/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
