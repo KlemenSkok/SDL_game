@@ -5,7 +5,7 @@ project(test VERSION 0.1.0 LANGUAGES C CXX)
 # CMake setup
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_PATH ${PROJECT_SOURCE_DIR}/include)
-set(OUTPUT_DIR "${CMAKE_SOURCE_DIR}/bin")
+set(OUTPUT_DIR "${PROJECT_SOURCE_DIR}/bin")
 #set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 #set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 #set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
@@ -42,9 +42,13 @@ foreach(SRC_FILE IN LISTS SRC)
     message(STATUS "${SRC_FILE}")
     endforeach()
     message(STATUS "")
-    
-add_executable(${PROJECT_NAME} ${SRC})
 
+# Add project executable
+add_executable(${PROJECT_NAME} ${SRC})
+# Save it to:
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR}
+)
 
 # LINK PROGRAMS
 target_link_libraries(
@@ -56,21 +60,22 @@ target_link_libraries(
     SDL2_image
 )
 
-# Copy over static files
+#COPY ALL FILES TO OUTPUT DIRECTORY
+
+# Copy over static .dll files
 message(STATUS "Copying all dependencies to ${OUTPUT_DIR}")
-file(GLOB PROJECT_DEPENDENCIES ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY})
+file(GLOB PROJECT_DEPENDENCIES ${CMAKE_PREFIX_PATH})
 
-foreach(Dependecy IN LISTS PROJECT_DEPENDENCIES)
-    file(
-        COPY ${Dependecy}
-        DESTINATION ${OUTPUT_DIR}
-    )
+foreach(Dependency IN LISTS PROJECT_DEPENDENCIES)
+    file(GLOB DLL_FILES "${Dependency}/bin/*.dll")
+
+    foreach(DLL_FILE IN LISTS DLL_FILES)
+        file(
+            COPY "${DLL_FILE}"
+            DESTINATION ${OUTPUT_DIR}
+        )
+    endforeach()
 endforeach()
-
-#TODO
-#  implement automatic copying of all dependencies to the output directory (${PROJECT_DIR}/bin)
-#  SDL2.dll, SDL2_image.dll, and the project executable
-
 
 
 #! ALSO NEEDED: 

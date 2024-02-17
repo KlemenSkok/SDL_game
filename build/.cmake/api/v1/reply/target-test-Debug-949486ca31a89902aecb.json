@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "test.exe"
+			"path" : "C:/Users/Klemen/Desktop/test3/bin/test.exe"
 		},
 		{
-			"path" : "test.pdb"
+			"path" : "C:/Users/Klemen/Desktop/test3/bin/test.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -30,7 +30,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 46,
+				"line" : 47,
 				"parent" : 0
 			},
 			{
@@ -42,7 +42,7 @@
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 50,
+				"line" : 54,
 				"parent" : 0
 			},
 			{

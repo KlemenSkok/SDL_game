@@ -33,5 +33,7 @@
 *.out
 *.app
 
-.vscode
+# Other
+.vscode/
 *.log
+build/
