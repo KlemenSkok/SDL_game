@@ -18,17 +18,19 @@ message(STATUS "Search for packages:")
 # SDL2 setup
 find_package(SDL2 REQUIRED)
 message(STATUS "Found package: ${SDL2_DIR}")
-
+# DLS2_image setup
 find_package(SDL2_Image REQUIRED)
 message(STATUS "Found package: ${SDL2_Image_DIR}")
 message(STATUS "")
 
+# set include directories
 include_directories(
     ${CMAKE_INCLUDE_PATH}
     "C:/ProgLangs/cpp_libs/SDL2-2.28.5/x86_64-w64-mingw32/include"
     "C:/ProgLangs/cpp_libs/SDL2-2.28.5/x86_64-w64-mingw32/include/SDL2"
     "C:/ProgLangs/cpp_libs/SDL2_image-2.6.3/x86_64-w64-mingw32/include"
 )
+# set link directories
 link_directories(
     "C:/ProgLangs/cpp_libs/SDL2-2.28.5/x86_64-w64-mingw32/lib"
     "C:/ProgLangs/cpp_libs/SDL2_image-2.6.3/x86_64-w64-mingw32/lib"
